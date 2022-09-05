@@ -197,7 +197,7 @@ void loop()
     press_counter = 0;
   }
 
-  if (button_debounced_state == 1 && millis() - button_released_time > 300 && press_counter > 0) {
+  if (button_debounced_state == 1 && millis() - button_released_time > 400 && press_counter > 0) {
     current_mode = press_counter;
     press_counter = 0;
   }
@@ -230,55 +230,58 @@ void loop()
       solid();
       break;
     case 2 :
-      solid();
-      addGlitter(80);
-      break;
-    case 3 :
-      breath2();
-      break;
-    case 4 : //meh
-      breath();
-      addGlitter(80);
-      break;
-    case 5 :
-      breath();
-      break;
-    case 6 :  //good
-      rainbow();
-      break;
-    case 7 :
-      rainbow2();
-      break;
-    case 8 :   //good
-      confetti();
-      break;
-    case 9:
-      for (int i = 0; i < NUM_LEDS; i++) {
-        if ( (i % 12) == spinner || ((i + 6) % 12) == spinner   )
-          leds[i] = main_color;
-        else
-          leds[i] =  CRGB::Black;
-      }
-      break;
-    case 10:
       for (int i = 0; i < NUM_LEDS; i++) {
         if ( (i % 12) == spinner || ((i + 6) % 12) == spinner || ((i + 3) % 12) == spinner || ((i + 9) % 12) == spinner)
           leds[i] = main_color;
         else
           leds[i] =  CRGB::Black;
       }
+
       break;
-    case 11:
-      breath3();
+    //case 3 :
+    //   breath2();
+    //   break;
+    //case 4 : //meh
+    //  breath();
+    //  addGlitter(80);
+    //  break;
+    //case 5 :
+    //   breath();
+    //  break;
+    case 3 :  //good
+      rainbow();
       break;
+    case 4 :
+      rainbow2();
+      break;
+    /*
+      case 8 :   //good
+        confetti();
+        break;
+      case 9:
+        for (int i = 0; i < NUM_LEDS; i++) {
+          if ( (i % 12) == spinner || ((i + 6) % 12) == spinner   )
+            leds[i] = main_color;
+          else
+            leds[i] =  CRGB::Black;
+        }
+        break;
+      case 10:
+        solid();
+        addGlitter(80);
+        break;
+      case 11:
+        breath3();
+        break;
+    */
     default :
       for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB::Black;
       }
   }
 
-  for (int i = 0; i < NUM_LEDS ; i++) {
 
+  for (int i = 0; i < NUM_LEDS ; i++) {
     leds_blend[i].fadeToBlackBy(8);
     leds_output[i] = leds[i] + leds_blend[i];
   }
